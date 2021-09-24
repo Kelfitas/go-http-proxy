@@ -75,7 +75,7 @@ func serveReverseProxy(target string, res http.ResponseWriter, req *http.Request
 		return nil
 	}
 
-	isWebsocket := req.Header.Get("Connection") == "Upgrade"
+	isWebsocket := strings.ToLower(req.Header.Get("Connection")) == "upgrade"
 	var wsProxy *websocketproxy.WebsocketProxy
 	if isWebsocket {
 		url.Scheme = strings.Replace(url.Scheme, "http", "ws", 1) // http(s) -> ws(s)
